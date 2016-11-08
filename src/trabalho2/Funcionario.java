@@ -46,7 +46,7 @@ public class Funcionario {
 		this.competencias = competencias;
 	}
 	
-	public void mostrarInformacoes(int index) {
+	public void mostrarInformacoes(int index, int offset) {
 		String competencias = "";
 		
 		for (int i = 0; i < getNum_competencias(); i++) {
@@ -60,7 +60,7 @@ public class Funcionario {
 		}
 		
 		System.out.println(
-			index + 1 + 
+			(index + offset) + 
 			" - Nome: " + 
 			this.getNome() + 
 			", Salário: R$" + 

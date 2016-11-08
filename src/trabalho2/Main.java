@@ -102,10 +102,16 @@ public class Main {
 					adicionarFuncionario();
 				break;
 			case "2":
+					System.out.println();
+					System.out.println("===== ** =====");
+					System.out.println();
+				
 					listarFuncionarios();
+					
+					menuFuncionarios();
 				break;
 			case "3":
-					// excluirFuncionario();
+					menuExcluirFuncionario();
 				break;
 			case "4":
 					menuPrincipal();
@@ -118,16 +124,58 @@ public class Main {
 		}
 	}
 	
-	private void listarFuncionarios() {
+	private void menuExcluirFuncionario() {
+		System.out.println();
+		System.out.println("===== ** =====");
+		System.out.println();
+		System.out.println("Escolha um funcionario para ser excluido:");
+		System.out.println("0 - Voltar");
+		
+		System.out.println();
+		
+		listarFuncionarios(1);
+		
+		System.out.println();
+		
+		System.out.print("Digite o numero do funcionario desejado:");
+		
+		String escolhaMenu = scanner.nextLine();
+		
+		switch (escolhaMenu) {
+			case "0":
+					menuFuncionarios();
+				break;
+			default:
+					excluirFuncionario(Integer.parseInt(escolhaMenu) - 1);
+				break;
+		}
+	}
+	
+	private void excluirFuncionario(int index) {
 		System.out.println();
 		System.out.println("===== ** =====");
 		System.out.println();
 		
-		for (int i = 0; i < funcionarios.size(); i++) {
-			funcionarios.get(i).mostrarInformacoes(i);;
+		try {
+			funcionarios.remove(index);
+			
+			System.out.println("Funcionario removido com sucesso!");
+		} catch(Exception e) {			
+			System.out.println("Erro ao remover o funcionario. Tente novamente.");
+			System.out.println("Erro: " + e);
 		}
 		
 		menuFuncionarios();
+	}
+	
+	private void listarFuncionarios(int index) {				
+		for (int i = 0; i < funcionarios.size(); i++) {
+			funcionarios.get(i).mostrarInformacoes(i, index);
+		}
+	}
+	
+	private void listarFuncionarios() {
+		listarFuncionarios(1);
 	}
 	
 	private void adicionarFuncionario() {
@@ -138,19 +186,15 @@ public class Main {
 		
 		System.out.println();
 		
-		// Nome
 		System.out.print("Nome: ");
 		String nome = scanner.nextLine();
 
-		// Salario
 		System.out.print("Salario: ");
 		String salario = scanner.nextLine();
 		
-		// Numero de competencias
 		System.out.print("Numero de competencias: ");
 		int num_competencias = Integer.parseInt(scanner.nextLine());
 		
-		// Competencias
 		String[] competencias = new String[num_competencias];
 		
 		int index = 0;
