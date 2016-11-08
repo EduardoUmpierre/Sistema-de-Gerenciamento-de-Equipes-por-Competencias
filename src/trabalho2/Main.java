@@ -8,6 +8,7 @@ public class Main {
 	static Scanner scanner = new Scanner(System.in);
 	
 	private Vetor<Funcionario> funcionarios = new Vetor<>();
+	private Vetor<Projeto> projetos = new Vetor<>();
 
 	public static void main(String[] args) {
 		try {
@@ -43,7 +44,7 @@ public class Main {
 		arquivo.skipLine();
 
 		while (arquivo.hasNext()) {
-			arquivo.readObject();
+			projetos.append(arquivo.readObject());
 		}
 		
 		arquivo.close();
