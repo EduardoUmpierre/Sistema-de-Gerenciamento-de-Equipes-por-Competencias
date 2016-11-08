@@ -55,12 +55,4 @@ public class Projeto {
 	public void setCompetencias(String[] competencias) {
 		this.competencias = competencias;
 	}
-	
-	@Override
-	public String toString() {	
-		return "Projeto [nome=" + nome +
-				", data_inicio=" + data_inicio +
-				", data_fim=" + data_fim +
-				", num_competencias=" + num_competencias;
-	}
 }

@@ -124,17 +124,7 @@ public class Main {
 		System.out.println();
 		
 		for (int i = 0; i < funcionarios.size(); i++) {
-			Funcionario funcionario = funcionarios.get(i);
-			
-			System.out.println(
-				i + 1 + 
-				" - Nome: " + 
-				funcionario.getNome() + 
-				", Salário: R$" + 
-				funcionario.getSalario() +
-				", Número de competências: " +
-				funcionario.getNum_competencias()
-			);
+			funcionarios.get(i).mostrarInformacoes(i);;
 		}
 		
 		menuFuncionarios();

@@ -46,11 +46,29 @@ public class Funcionario {
 		this.competencias = competencias;
 	}
 	
-	@Override
-	public String toString() {	
-		return "Funcionario [nome=" + nome +
-				", salario=" + salario +
-				", num_competencias=" + num_competencias;
+	public void mostrarInformacoes(int index) {
+		String competencias = "";
+		
+		for (int i = 0; i < getNum_competencias(); i++) {
+			competencias += getCompetencias()[i];
+			
+			if(i == getNum_competencias() - 1) {
+				competencias += ".";
+			} else {
+				competencias += ", ";
+			}
+		}
+		
+		System.out.println(
+			index + 1 + 
+			" - Nome: " + 
+			this.getNome() + 
+			", Salário: R$" + 
+			this.getSalario() +
+			", Número de competências: " +
+			this.getNum_competencias() +
+			", Competências: " +
+			competencias
+		);
 	}
-
 }
