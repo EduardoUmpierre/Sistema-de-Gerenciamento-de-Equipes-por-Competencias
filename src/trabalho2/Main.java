@@ -6,6 +6,8 @@ import java.util.Scanner;
 public class Main {
 	
 	static Scanner scanner = new Scanner(System.in);
+	
+	private Vetor<Funcionario> funcionarios = new Vetor<>();
 
 	public static void main(String[] args) {
 		try {
@@ -29,8 +31,8 @@ public class Main {
 		arquivo.skipLine();
 		
 		while (arquivo.hasNext()) {
-			arquivo.readObject();
-		}
+			funcionarios.append(arquivo.readObject());
+		}		
 		
 		arquivo.close();
 	}
@@ -59,7 +61,7 @@ public class Main {
 		System.out.println();
 		System.out.print("Digite o numero de menu desejado: ");
 		
-		String escolhaMenu = scanner.next();
+		String escolhaMenu = scanner.nextLine();
 		
 		switch (escolhaMenu) {
 			case "1":
@@ -85,23 +87,27 @@ public class Main {
 		System.out.println();
 		System.out.println("Menu de funcionarios:");
 		System.out.println("1 - Cadastrar novo funcionario");
-		System.out.println("2 - Excluir funcionario");
+		System.out.println("2 - Listar funcionarios");
+		System.out.println("3 - Excluir funcionario");
 		
-		System.out.println("3 - Voltar");
+		System.out.println("4 - Voltar");
 		
 		System.out.println();
 		System.out.print("Digite o numero de menu desejado: ");
 		
-		String escolhaMenu = scanner.next();
+		String escolhaMenu = scanner.nextLine();
 		
 		switch (escolhaMenu) {
 			case "1":
 					adicionarFuncionario();
 				break;
 			case "2":
-					//excluirFuncionario();
+					listarFuncionarios();
 				break;
 			case "3":
+					// excluirFuncionario();
+				break;
+			case "4":
 					menuPrincipal();
 				break;
 			default:
@@ -112,12 +118,33 @@ public class Main {
 		}
 	}
 	
+	private void listarFuncionarios() {
+		System.out.println();
+		System.out.println("===== ** =====");
+		System.out.println();
+		
+		for (int i = 0; i < funcionarios.size(); i++) {
+			Funcionario funcionario = funcionarios.get(i);
+			
+			System.out.println(
+				i + 1 + 
+				" - Nome: " + 
+				funcionario.getNome() + 
+				", Salário: R$" + 
+				funcionario.getSalario() +
+				", Número de competências: " +
+				funcionario.getNum_competencias()
+			);
+		}
+		
+		menuFuncionarios();
+	}
+	
 	private void adicionarFuncionario() {
 		System.out.println();
 		System.out.println("===== ** =====");
 		System.out.println();
-		System.out.println("Adicionar funcionario:");		
-		System.out.println("0 - Voltar");
+		System.out.println("Adicionar funcionario:");	
 		
 		System.out.println();
 		
@@ -131,7 +158,7 @@ public class Main {
 		
 		// Numero de competencias
 		System.out.print("Numero de competencias: ");
-		int num_competencias = scanner.nextInt();
+		int num_competencias = Integer.parseInt(scanner.nextLine());
 		
 		// Competencias
 		String[] competencias = new String[num_competencias];
@@ -144,8 +171,12 @@ public class Main {
 			index++;
 		}
 		
-		Funcionario funcionario = new Funcionario(nome, salario, num_competencias, competencias);
+		funcionarios.append(new Funcionario(nome, salario, num_competencias, competencias));
 		
-		funcionario.toString();
+		System.out.println();
+		System.out.println("Funcionario " + nome + " adicionado com sucesso!");
+		
+		// Volta para o menu de funcionarios
+		menuFuncionarios();
 	}
 }
