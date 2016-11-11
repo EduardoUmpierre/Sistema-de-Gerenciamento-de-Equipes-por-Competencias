@@ -17,9 +17,11 @@ public class Vetor <T> {
 		if(numElementos == vet.length){
 			@SuppressWarnings("unchecked")
 			T[] newVet = (T[])new Object[vet.length * 2];
+			
 			for(int i = 0; i < vet.length; i++){
 				newVet[i] = vet[i];
 			}
+			
 			vet = newVet;
 		}
 	}
@@ -30,6 +32,7 @@ public class Vetor <T> {
 
 	public T get(int index) {
 		validaIndice(index);
+		
 		return (T)vet[index];
 	}
 	
@@ -42,19 +45,22 @@ public class Vetor <T> {
 	public void insert(int index, T valor) {
 		validaIndice(index);
 		garantirTamanho();
+		
 		for(int i = numElementos;i > index; i--){
 			vet[i] = vet[i - 1];
 		}
+		
 		vet[index] = valor;
 		numElementos++;
 	}
 
 	public void remove(int index) {
 		validaIndice(index);
-		for (int i = index; i < numElementos-1; i++)
-		{
+		
+		for (int i = index; i < numElementos-1; i++) {
 			vet[i] = vet[i + 1];
 		}
+		
 		numElementos--;
 	}
 	
