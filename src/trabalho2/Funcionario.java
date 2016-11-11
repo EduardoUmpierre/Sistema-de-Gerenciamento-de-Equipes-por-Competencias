@@ -5,9 +5,9 @@ public class Funcionario {
 	private String nome;
 	private String salario;
 	private Integer num_competencias;
-	private String[] competencias;
+	private Competencia[] competencias;
 	
-	public Funcionario(String nome, String salario, Integer num_competencias, String[] competencias) {
+	public Funcionario(String nome, String salario, Integer num_competencias, Competencia[] competencias) {
 		setNome(nome);
 		setSalario(salario);
 		setNum_competencias(num_competencias);
@@ -38,19 +38,19 @@ public class Funcionario {
 		this.num_competencias = num_competencias;
 	}
 
-	public String[] getCompetencias() {
+	public Competencia[] getCompetencias() {
 		return competencias;
 	}
 
-	public void setCompetencias(String[] competencias) {
+	public void setCompetencias(Competencia[] competencias) {
 		this.competencias = competencias;
 	}
 	
-	public void mostrarInformacoes(int index, int offset) {
+	public String competenciasToString() {
 		String competencias = "";
 		
 		for (int i = 0; i < getNum_competencias(); i++) {
-			competencias += getCompetencias()[i];
+			competencias += getCompetencias()[i].getCompetencia();
 			
 			if(i == getNum_competencias() - 1) {
 				competencias += ".";
@@ -59,8 +59,26 @@ public class Funcionario {
 			}
 		}
 		
+		return competencias;
+	}
+	
+	public Integer numeroDeProjetos(Vetor<Colaborador> colaboradores) {
+		Integer num_projetos = 0;
+		
+		for(int i = 0; i < colaboradores.size(); i++){			
+			Colaborador colaborador = colaboradores.get(i);
+			
+			if(colaborador.getNome_funcionario().equals(this.getNome())){
+				num_projetos++;
+			}
+		}
+		
+		return num_projetos;
+	}
+	
+	public void mostrarInformacoes(int index) {		
 		System.out.println(
-			(index + offset) + 
+			(index + 1) + 
 			" - Nome: " + 
 			this.getNome() + 
 			", Salário: R$" + 
@@ -68,7 +86,7 @@ public class Funcionario {
 			", Número de competências: " +
 			this.getNum_competencias() +
 			", Competências: " +
-			competencias
+			this.competenciasToString()
 		);
 	}
 }

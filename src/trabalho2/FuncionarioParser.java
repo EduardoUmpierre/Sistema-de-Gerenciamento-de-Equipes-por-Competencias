@@ -11,11 +11,11 @@ public class FuncionarioParser implements Parser<Funcionario> {
 		String salario = arquivo.next();
 		int num_competencias = arquivo.nextInt();
 		
-		String[] competencias = new String[num_competencias];
+		Competencia[] competencias = new Competencia[num_competencias];
 		int index = 0;
 		
 		while (arquivo.hasNext()) {
-			 competencias[index] = arquivo.next();			 
+			 competencias[index] = new Competencia(arquivo.next());			 
 			 index++;
 		}
 		
