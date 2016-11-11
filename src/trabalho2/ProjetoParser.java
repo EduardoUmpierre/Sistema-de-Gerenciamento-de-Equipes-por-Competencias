@@ -1,5 +1,7 @@
 package trabalho2;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class ProjetoParser implements Parser<Projeto> {
@@ -8,15 +10,18 @@ public class ProjetoParser implements Parser<Projeto> {
 		arquivo.useDelimiter(";");
 		
 		String nome = arquivo.next();
-		String data_inicio = arquivo.next();
-		String data_fim = arquivo.next();
+		
+		DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd"); 
+		
+		LocalDate data_inicio = LocalDate.parse(arquivo.next(), formato);
+		LocalDate data_fim = LocalDate.parse(arquivo.next(), formato);
 		int num_competencias = arquivo.nextInt();
 		
-		String[] competencias = new String[num_competencias];
+		Competencia[] competencias = new Competencia[num_competencias];
 		int index = 0;
 		
 		while (arquivo.hasNext()) {
-			 competencias[index] = arquivo.next();			 
+			 competencias[index] = new Competencia(arquivo.next());			 
 			 index++;
 		}
 		
